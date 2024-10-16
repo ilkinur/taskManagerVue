@@ -12,6 +12,7 @@ import store from './store';
 import vmodal from 'vue-js-modal'
 
 Vue.config.productionTip = false
+Vue.config.devtools = false;
 
 Vue.use(VeeValidate)
 Vue.use(vmodal)

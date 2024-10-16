@@ -63,11 +63,11 @@ export default {
         title: "",
         description: "",
         due_date: "",
-        status: 0
+        status: false
       },
       status:[
-        {name:"Pending",id:0},
-        {name:"Completed",id:1}
+        {name:"Pending",id:false},
+        {name:"Completed",id:true}
       ],
     }
   },

@@ -73,8 +73,8 @@
               <td>{{ item.title }}</td>
               <td>{{ item.description }}</td>
               <td>{{ format_date(item.due_date) }}</td>
-              <td v-if="item.status==0">Pending</td>
-              <td v-else-if="item.status==1">Completed</td>
+              <td v-if="item.status==false">Pending</td>
+              <td v-else-if="item.status==true">Completed</td>
               <td v-else></td>
               <td>
                 <input type="checkbox" class="smsCheckbox" @change="completed(item)" :checked="item.status">
@@ -137,8 +137,8 @@ export default {
       },
       status:[
         {name:"All",id:""},
-        {name:"Pending",id:0},
-        {name:"Completed",id:1}
+        {name:"Pending",id:false},
+        {name:"Completed",id:true}
       ],
       currentPage: 1,
       totalPage:0,
@@ -147,12 +147,12 @@ export default {
   },
   methods: {
     completed(i){
-      if(i.status === 0){
-        i.status = 1;
+      if(i.status == false){
+        i.status = true;
         this.update(i)
       }
-      else if(i.status === 1){
-        i.status = 0;
+      else if(i.status == true){
+        i.status = false;
         this.update(i)
       }
     },
@@ -172,10 +172,10 @@ export default {
           this.loading = false
         }
       }).catch((error) => {
-        if(i.status === 0)
-          i.status = 1;
-        else if(i.status === 1)
-          i.status = 0;
+        if(i.status == false)
+          i.status = true;
+        else if(i.status == true)
+          i.status = false;
         this.$toast.error(error.response.data.message, {position: "top-right"});
         Object.keys(error.response.data.errors).forEach((key) => {
           error.response.data.errors[key].forEach((errorMessage) => {
